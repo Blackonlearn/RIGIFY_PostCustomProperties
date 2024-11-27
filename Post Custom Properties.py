@@ -1,20 +1,27 @@
 import bpy
 
-Bone = "Properties"
+Bone1 = "Properties"
+Bone2 = 'Properties.001'
 # New block of code to insert in place of `if is_selected({'Properties'}):`
 new_code = f'''
-# Custom Properties of {Bone} Bones
-        if is_selected({{'{Bone}'}}):
+# Custom Properties of {Bone1} Bones
+        if is_selected({{'{Bone1}'}}):
             emit_rig_separator()
             
             #Dynamics
-            row = layout.row()
+            group1 = layout.column(align=True)
+            row = group1.row()
             row.label(text= "Dynamic Bone Settings", icon = 'IPO_ELASTIC')
-            row = layout.row()
             
+            group1 = layout.column(align=True)
+            group2 = group1.row(align=True)
             #Dynamics sliders
-            layout.prop(pose_bones['Properties'], '["prop"]', text='Ponytail', slider=True)
-            layout.prop(pose_bones['Properties'], '["prop1"]', text='Front Bangs', slider=True)
+            group2.prop(pose_bones['Properties'], '["prop"]', text='Ponytail', slider=True)
+            group2.prop(pose_bones['Properties'], '["prop1"]', text='Front Bangs', slider=True)
+            
+            group2 = group1.row(align=True)
+            group1.prop(pose_bones['Properties'], '["prop"]', text='Ponytail', slider=True)
+            group1.prop(pose_bones['Properties'], '["prop"]', text='Ponytail', slider=True)
             
             #Clothing
             row = layout.row()
@@ -33,6 +40,15 @@ new_code = f'''
             #Mechanisms Sliders
             props = layout.prop(pose_bones['Properties'],'["prop4"]', text='Hair', slider=True)
             props = layout.prop(pose_bones['Properties'],'["prop5"]', text='Head', slider=True)
+
+        if is_selected({{'{Bone2}'}}):
+            emit_rig_separator()
+            layout.prop(pose_bones['Properties.001'], '["prop"]', text='Prop', slider=True)
+            layout.prop(pose_bones['Properties.001'], '["prop1"]', text='Prop1', slider=True)
+            layout.prop(pose_bones['Properties.001'], '["prop2"]', text='Prop2', slider=True)
+            layout.prop(pose_bones['Properties.001'], '["prop3"]', text='Prop3', slider=True)
+            layout.prop(pose_bones['Properties.001'], '["prop4"]', text='Prop4', slider=True)
+            layout.prop(pose_bones['Properties.001'], '["prop5"]', text='Prop5', slider=True)
 '''
 
 # Find the A.py text block (renamed rig_ui.py in this context)
@@ -46,7 +62,7 @@ else:
     # Find the location of the `if is_selected({'Properties'}):` block
     insertion_point = None
     for index, line in enumerate(a_lines):
-        if line.strip() == f"if is_selected({{'{Bone}'}}):":  # Use the value of Bone dynamically
+        if line.strip() == f"if is_selected({{'{Bone1}'}}):":  # Use the value of Bone dynamically
             insertion_point = index  # The `if is_selected({'Properties'}):` line itself
             break
 
