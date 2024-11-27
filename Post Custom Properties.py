@@ -70,3 +70,10 @@ else:
         print("Code replaced in rig_ui.py.")
     else:
         print(f"if is_selected({{'{Bone}'}}): block not found.")
+    
+    try:
+        # Execute the content of the text block
+        exec(a_text.as_string())
+        print(f"Successfully executed {a_text}.")
+    except Exception as e:
+        print(f"Error while executing {a_text}: {e}")
