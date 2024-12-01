@@ -1,6 +1,6 @@
 import bpy
 
-#This simple code is mine, and it has already been pushed to github repo as my archive: https://github.com/Blackonlearn/BlendCustomProperties/blob/main/PostCustomProperties.py
+#This simple code is mine, and it has already been pushed to github repo as my archive: https://github.com/Blackonlearn/RIGIFY_PostCustomProperties/blob/main/PostCustomProperties.py
 
 Bone1 = "Properties"
 Bone2 = 'Properties.001'
